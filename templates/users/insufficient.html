@@ -1,0 +1,20 @@
+<!-- users/templates/users/insufficient_funds.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+Insufficient Funds - Ticket Platform
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="alert alert-danger" role="alert">
+                Insufficient funds in your wallet. Please top up your wallet.
+            </div>
+            <a href="{% url 'top_up_wallet' %}" class="btn btn-teal">Top Up Wallet</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

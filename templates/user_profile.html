@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User Profile - Ticket Platform
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">User Profile</h2>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5 class="card-subtitle mb-2 text-muted">User Information</h5>
+                            <p class="card-text"><strong>Username:</strong> {{ request.user.username }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ request.user.email }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="card-subtitle mb-2 text-muted">Wallet</h5>
+                            <p class="card-text"><strong>Balance:</strong> {{ wallet.balance }}</p>
+                            <form action="{% url 'top_up_wallet' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Deposit Funds</button>
+                            </form>
+                            <form action="{% url 'withdraw_earnings' %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger mt-2">Withdraw Funds</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5 class="card-subtitle mb-2 text-muted">Update Profile</h5>
+                            <form action="{% url 'update_profile' %}" method="post">
+                                {% csrf_token %}
+                                <!-- Profile fields (e.g., name, email, etc.) -->
+                                <button type="submit" class="btn btn-primary">Update Profile</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-subtitle mb-2 text-muted">Transaction History</h5>
+                            <ul class="list-group">
+                                {% for transaction in transactions %}
+                                    <li class="list-group-item">{{ transaction.timestamp }} - {{ transaction.transaction_type }}: {{ transaction.amount }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

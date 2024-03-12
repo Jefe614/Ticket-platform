@@ -1,0 +1,40 @@
+<!-- users/templates/users/top_up_wallet.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+Top Up Wallet - Ticket Platform
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="mb-4">Top Up Wallet</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_amount">Amount</label>
+                    <input type="number" class="form-control" id="id_amount" name="amount" min="0" step="0.01" required>
+                </div><br>
+                <button type="submit" class="btn btn-teal">Top Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    /* Form styling */
+    .btn-teal {
+        background-color: #006666;
+        border-color: #006666;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+    .btn-teal:hover {
+        background-color: #004d4d;
+        border-color: #004d4d;
+    }
+</style>
+{% endblock %}
